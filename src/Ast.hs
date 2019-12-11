@@ -33,4 +33,7 @@ instance Show a => Show (Ast a) where
   show (Cos x) = "cos(" ++ show x ++ ")"
   show (Sin x) = "sin(" ++ show x ++ ")"
   show (Ln x) = "ln(" ++ show x ++ ")"
+  show (Pow x y) = "(" ++ show x ++ " ^ " ++ show y ++ ")"
+  show Pi = "pi"
+  show E = "e"
 
