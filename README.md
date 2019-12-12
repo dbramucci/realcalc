@@ -34,6 +34,7 @@ Note that Haskell by default uses `%` to mean `2 % 3` is the Ratio 2/3. It will 
 
 ```
 Expr is (2 % 1 + 3 % 1)
+result when computed as a Double is 5.0
 result computed as a Rational is = 5 % 1
 result computed as a Rational and casted to a Double is = 5.0
 ```
@@ -42,6 +43,7 @@ result computed as a Rational and casted to a Double is = 5.0
 
 ```
 Expr is (2 % 1 + 3 % 1)
+result when computed as a Double is 5.0
 result computed as a Rational is = 5 % 1
 result computed as a Rational and casted to a Double is = 5.0
 ```
@@ -50,6 +52,7 @@ result computed as a Rational and casted to a Double is = 5.0
 
 ```
 Expr is ((1 % 1000000000000000000000 + 1000000000 % 1) - 1000000000 % 1)
+result when computed as a Double is 0.0
 result computed as a Rational is = 1 % 1000000000000000000000
 result computed as a Rational and casted to a Double is = 1.0e-21
 ```
@@ -65,6 +68,7 @@ Prelude> 0.000000000000000000001 + 1000000000 - 1000000000 :: Double
 
 ```
 Expr is (2 % 1 + (3 % 1 * ((2 % 1 / 3 % 1) - (4 % 1 / 5 % 1))))
+result when computed as a Double is 1.5999999999999996
 result computed as a Rational is = 8 % 5
 result computed as a Rational and casted to a Double is = 1.6
 ```
@@ -73,6 +77,7 @@ result computed as a Rational and casted to a Double is = 1.6
 
 ```
 Expr is (3 % 10 - 1 % 5)
+result when computed as a Double is 9.999999999999998e-2
 result computed as a Rational is = 1 % 10
 result computed as a Rational and casted to a Double is = 0.1
 ```

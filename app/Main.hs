@@ -1,3 +1,4 @@
+{- LANGUAGE NoMonomorphismRestriction -}
 module Main where
 
 
@@ -13,20 +14,19 @@ type DisplayNum = Double
 
 main :: IO ()
 main = do
-  -- For standalone exe
-  -- [prog, _, text] <- getArgs :: IO [String]
   (text: _) <- getArgs :: IO [String]
   case id <$> parseFull text of
     Success expr -> do
       putStr "Expr is "
       print expr
       
-      {-
-      let doubleResult = computeAst expr :: Double
+      
+      let Success exprDouble = parseFull text
+      let doubleResult = computeAst exprDouble :: Double
       putStr "result when computed as a Double is "
       print doubleResult
-      -}
-
+      
+      
       let result = computeAst expr :: ComputationNum
       putStr "result computed as a Rational is = "
       print result
@@ -35,6 +35,7 @@ main = do
       let displayResult = fromRational result :: DisplayNum
       putStr "result computed as a Rational and casted to a Double is = "
       print displayResult
+      
     Failure err -> do
       putStr "Error when parsing: "
       print err

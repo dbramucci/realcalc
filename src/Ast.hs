@@ -24,6 +24,10 @@ instance Consts (Ratio a) where
   pi = error "error pi is not Rational"
   e = error "error e is not Rational"
 
+instance Consts Double where
+  pi = Prelude.pi
+  e = exp 1
+
 instance Show a => Show (Ast a) where
   show (Constant x) = show x
   show (Add x y) = "(" ++ show x ++ " + " ++ show y ++ ")"
