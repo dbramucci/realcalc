@@ -16,7 +16,7 @@ import Data.Char (isSpace)
 import Data.Ratio ((%), Rational)
 
 -- I couldn't find the predefined rational primitive
-parseRational :: Parser Rational
+parseRational :: Fractional a => Parser a
 {-
 parseRational =
   do
@@ -37,10 +37,10 @@ parseRational =
   do
     num <- naturalOrScientific
     pure $ case num of
-      Left x -> toRational x
-      Right x -> toRational x
+      Left x -> fromRational $ toRational x
+      Right x -> fromRational $ toRational x
 
-term :: Parser (Ast Rational)
+term :: Fractional a => Parser (Ast a)
 term =
   do
     whiteSpace
@@ -50,7 +50,7 @@ term =
       <|> Constant <$> parseRational
   <?> "Term"
 
-factor :: Parser (Ast Rational)
+factor :: Fractional a => Parser (Ast a)
 factor =
   term `chainl1` multop
   <?> "Factor"
@@ -60,7 +60,7 @@ factor =
         whiteSpace
         Mult <$ char '*' <|> Divide <$ char '/'
 
-expression :: Parser (Ast Rational)
+expression :: Fractional a => Parser (Ast a)
 expression =
   factor `chainl1` addop
   <?> "Expression"
@@ -68,5 +68,6 @@ expression =
     addop = between whiteSpace whiteSpace $
           Add <$ char '+'
       <|> Sub <$ char '-'
-parseFull :: String -> Result (Ast Rational)
+
+parseFull :: Fractional a => String -> Result (Ast a)
 parseFull = parseString (expression <* eof <?> "full string") mempty
