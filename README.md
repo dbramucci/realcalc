@@ -91,22 +91,22 @@ Prelude> 0.3 - 0.2 :: Double
 ### `stack run "(2 + 3"`
 
 ```
-Error when parsing: ErrInfo {_errDoc = (interactive):1:7: error: unexpected
+Error when parsing: (interactive):1:7: error: unexpected
     EOF, expected: ")", "*", "+",
     "-", ".", "/", digit, exponent
 (2 + 3<EOF>
-      ^     , _errDeltas = [Columns 6 6]}
+      ^
 ```
 
-Here we can see how (although I haven't made it pretty), the parser can explain what went wrong with the parse.
+Here we can see how the parser can explain what went wrong with the parse.
 Not just that the input was not understandable.
 
 ### `stack run "2 + a + 3"`
 
 ```
-Error when parsing: ErrInfo {_errDoc = (interactive):1:5: error: expected: Factor
+Error when parsing: (interactive):1:5: error: expected: Factor
 2 + a + 3<EOF>
-    ^          , _errDeltas = [Columns 4 4]}
+    ^
 ```
 
 And this even points at errors in the middle of a parse.
